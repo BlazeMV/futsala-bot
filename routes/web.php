@@ -13,7 +13,6 @@
 
 
 
-Route::get('setwebhook', 'WebhookController@setWebhook');
 Route::post('webhook', 'WebhookController@getUpdates');
 
 Route::get('/', 'HomeController@index');
