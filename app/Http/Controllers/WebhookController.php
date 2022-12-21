@@ -3,20 +3,17 @@
 namespace App\Http\Controllers;
 
 use Log;
-use Telegram;
 use Telegram\Bot\Api;
 use App\ManagementEngine;
 use Illuminate\Http\Request;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\BadResponseException;
+use Telegram\Bot\Laravel\Facades\Telegram;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class WebhookController extends Controller
 {
     public function setWebhook(Request $request)
     {
-        $url = 'https://futsala-bot.herokuapp.com/webhook';
+        $url = 'https://futsala.blazemv.dev/webhook';
         $res = Telegram::setWebhook(['url' => $url]);
         dd($res);
     }
@@ -40,7 +37,7 @@ class WebhookController extends Controller
                 $class = "App\TelegramCallbackQueries\\" . studly_case($data[0]) . "CallbackQuery";
                 array_shift($data);
                 $call = new $class;
-                $call->make(new Api($token = config('telegram.bots.Futsala.token')), $data, $update);
+                $call->make(new Api(config('telegram.bots.Futsala.token')), $data, $update);
             } catch (FatalThrowableError $ex) {
                 return $ex->getMessage();
             }

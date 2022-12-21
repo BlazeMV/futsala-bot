@@ -26,13 +26,15 @@ Route::prefix('/cms')->group(function () {
     Route::post('/addrole', 'view\HomeController@addRole')->name('addrole');
 
     Route::get('/events', function () {
-        dd(\App\Event::all());
+        dd(\App\Event::with(['Participants', 'Chat', 'Teams'])->get()->toArray());
     });
+
     Route::get('/parts', function () {
-        dd(\App\Participant::all());
+        dd(\App\Participant::with(['Event', 'User', 'Team'])->get()->toArray());
     });
+
     Route::get('/teams', function () {
-        dd(\App\Team::all());
+        dd(\App\Team::with(['Event', 'Members', 'Leader'])->get()->toArray());
     });
     
     Route::get('/qwer', function () {
@@ -46,8 +48,8 @@ Route::prefix('/cms')->group(function () {
             $chat->Users()->detach();
         }*/
         $data = [];
-        foreach (\App\Chat::all() as $chat) {
-            $data[] = $chat->Users();
+        foreach (\App\Chat::with('Users')->get() as $chat) {
+            $data[$chat->title ?: $chat->username] = $chat->Users->toArray();
         }
         dd($data);
     });

@@ -41,13 +41,13 @@ return [
     'bots' => [
         'Futsala' => [
             'username'  => 'FutsalaBot',
-            'token' => env('TELEGRAM_BOT_TOKEN', '540612938:AAGmLkcPl3-RBlzM7kMR-pm8hAjUa3R11tI'),
+            'token' => env('TELEGRAM_BOT_TOKEN', ''),
             'commands' => [
                 App\TelegramCommands\HelpCommand::class,
                 App\TelegramCommands\StartCommand::class,
                 App\TelegramCommands\ScheduleCommand::class,
                 App\TelegramCommands\CancelCommand::class,
-                \App\TelegramCommands\EventCommand::class,
+                App\TelegramCommands\EventCommand::class,
 //                Acme\Project\Commands\MyTelegramBot\BotCommand::class
             ],
         ],
