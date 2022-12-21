@@ -19,7 +19,7 @@ Route::get('/', 'HomeController@index');
 
 
 /* View */
-Route::prefix('/cms')->group(function () {
+Route::middleware('auth')->prefix('/cms')->group(function () {
     Route::get('/', 'view\HomeController@index')->name('home');
     Route::post('/authorize', 'view\HomeController@authorizeChat')->name('authorize');
     Route::post('/addrole', 'view\HomeController@addRole')->name('addrole');
