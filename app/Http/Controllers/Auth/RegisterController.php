@@ -36,6 +36,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        throw new \Exception("You cannot register");
         $this->middleware('guest');
     }
 
